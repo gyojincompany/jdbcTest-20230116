@@ -34,6 +34,7 @@
 				
 				out.println(db_id + "/" + db_pw + "/" + db_name + "/" + db_email + "/" + db_jointime + "<br>");  
 			}
+			
 			rs.close();
 			stmt.close();
 			

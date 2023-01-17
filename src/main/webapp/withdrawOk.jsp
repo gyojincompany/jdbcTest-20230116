@@ -12,16 +12,13 @@
 		request.setCharacterEncoding("utf-8");
 	
 		String mid = request.getParameter("id");
-		String mpw = request.getParameter("password");
-		String mname = request.getParameter("name");
-		String memail = request.getParameter("email");
 		
 		String driverName = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/webdb";
 		String username = "root";
 		String password = "1234";
 		
-		String sql = "INSERT INTO members(id, password, name, email) VALUES ('"+mid+"','"+mpw+"','"+mname+"','"+memail+"')";
+		String sql = "DELETE FROM members WHERE id= '"+mid+"'";
 		
 		Connection conn = null;//DB 연결 선언
 		
@@ -33,9 +30,9 @@
 			int dbCheck = stmt.executeUpdate(sql);
 			
 			if(dbCheck == 1) {
-				out.println("회원 가입 성공!!");
+				out.println("회원 탈퇴 성공!!");
 			} else {
-				out.println("회원 가입 실패!!");
+				out.println("회원 탈퇴 실패!!");
 			}
 			
 			stmt.close();
@@ -55,6 +52,6 @@
 		
 	%>
 	<br>
-	<a href="withdraw.jsp">회원탈퇴로 가기</a>
+	<a href="join.jsp">회원가입으로 가기</a>
 </body>
 </html>
