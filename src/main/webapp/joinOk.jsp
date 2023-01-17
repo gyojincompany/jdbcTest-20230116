@@ -55,6 +55,7 @@
 		
 	%>
 	<br>
-	<a href="withdraw.jsp">회원탈퇴로 가기</a>
+	<a href="withdraw.jsp">회원탈퇴로 가기</a><br><br>
+	<a href="memberList.jsp">회원 리스트로 가기</a>
 </body>
 </html>

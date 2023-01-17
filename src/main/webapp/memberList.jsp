@@ -8,7 +8,7 @@
 <title>회원 정보 리스트</title>
 </head>
 <body>
-	<%
+	<%!
 		String driverName = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/webdb";
 		String username = "root";
@@ -16,14 +16,18 @@
 		
 		String sql = "SELECT * FROM members";
 		
-		Connection conn = null;//DB 연결 선언
-		
+		Connection conn;//DB 연결 선언
+		Statement stmt;//sql 객체 선언
+		ResultSet rs;//결과값 저장 객체 선언
+	%>
+	
+	<%	
 		try {
 			Class.forName(driverName);//드라이버 불러오기
 			conn = DriverManager.getConnection(url, username, password);//DB 연동
-			Statement stmt = conn.createStatement();
+			stmt = conn.createStatement();
 			
-			ResultSet rs = stmt.executeQuery(sql);//sql문의 결과 값이 저장(select문이 반환하는 레코드 저장)
+			rs = stmt.executeQuery(sql);//sql문의 결과 값이 저장(select문이 반환하는 레코드 저장)
 			
 			while(rs.next()) {
 				String db_id =  rs.getString("id");
@@ -34,15 +38,17 @@
 				
 				out.println(db_id + "/" + db_pw + "/" + db_name + "/" + db_email + "/" + db_jointime + "<br>");  
 			}
-			
-			rs.close();
-			stmt.close();
-			
 			//System.out.println(conn);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {				
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+				if(stmt != null) {
+					stmt.close();
+				}				
 				if(conn != null) {
 					conn.close();
 				}
